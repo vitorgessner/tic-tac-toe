@@ -13,7 +13,7 @@ ctx.lineWidth = 30;
 // ctx.stroke();
 
 // vertical
-ctx.lineWidth = 18;
+ctx.lineWidth = 5;
 ctx.moveTo(canvas.width / 3, 0);
 ctx.lineTo(canvas.width / 3, canvas.height);
 ctx.moveTo(canvas.width / 1.5, 0);

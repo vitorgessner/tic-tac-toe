@@ -1,29 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas tutorial</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="canvas.js"></script>
-    <script src="script.js"></script>
+    <script defer src="interface.js"></script>
 </head>
-<body>
-    <header>
-        <div id="topBar">
-            <div>
-                <label for="jog1">Jogador 1</label>
-                <input type="text" id="jog1">
-            </div>
-            <div><span>&times;</span></div>
-            <div>
-                <label for="jog2">Jogador 2</label>
-                <input type="text" id="jog2">
-            </div>
-        </div>
-        <button>Jogar</button>
-    </header>
 
-    <canvas id="canvas" width="600" height="600"></canvas>
+<body>
+    <div class="wrapper">
+        <header>
+            <div id="topBar">
+                <div class="teste">
+                    <label for="jog1">Jogador 1</label>
+                    <input type="text" id="jog1">
+                    <div class="inputs">
+                        <div class="inputRadio">
+                            <label for="x1">X</label>
+                            <input type="radio" name="simbolo" id="x1" checked>
+                        </div>
+                        <div class="inputRadio">
+                            <label for="o1">O</label>
+                            <input type="radio" name="simbolo" id="o1">
+                        </div>
+                    </div>
+                </div>
+                <div class="teste"><span>&times;</span></div>
+                <div class="teste">
+                    <label for="jog2">Jogador 2</label>
+                    <input type="text" id="jog2">
+                    <div class="inputs">
+                        <div class="inputRadio">
+                            <label for="x2">X</label>
+                            <input type="radio" name="simbolo2" id="x2">
+                        </div>
+                        <div class="inputRadio">
+                            <label for="o2">O</label>
+                            <input type="radio" name="simbolo2" id="o2" checked>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <button id="jogar">Jogar</button>
+        </header>
+
+        <aside>
+            <h1>Ranking</h1>
+            <ul id="jogadores">
+                <!-- <li>player1</li>
+                <li>player2</li>
+                <li>player3</li>
+                <li>player4</li>
+                <li>player5</li>
+                <li>player6</li> -->
+            </ul>
+        </aside>
+
+        <div class="canva">
+            <canvas id="canvas" width="570" height="570"></canvas>
+        </div>
+
+    </div>
 </body>
+
 </html>
