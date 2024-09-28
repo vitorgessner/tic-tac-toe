@@ -22,15 +22,21 @@ inputsRadio[1].addEventListener("change", () => {
 })
 
 botao.addEventListener("click", () => {
-    document.getElementById("jogar").setAttribute("disabled", "")
     for (let i = 0; i < campoJogadores.length; i++) {
         if (campoJogadores[i].value === "") {
             erro[i].textContent = "Precisa de nome";
             erro[i].style.display = "block";
+            return false
         } else if (campoJogadores[0].value === campoJogadores[1].value) {
             erro[i].style.display = "block";
             erro[i].textContent = "Nomes precisam ser diferentes";
+            return false
         } else {
+            if (campoJogadores[0].value && campoJogadores[1].value){
+                trancaCanvas();
+                document.getElementById("jogar").setAttribute("disabled", "")
+                resetaJogo();
+            }
             erro[i].style.display = "none";
             campoJogadores[i].setAttribute("disabled", "")
 
@@ -40,7 +46,6 @@ botao.addEventListener("click", () => {
             for (radio of simbolos2) {
                 radio.setAttribute("disabled", "")
             }
-            resetaJogo();
         }
     }
 })
