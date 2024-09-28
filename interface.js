@@ -58,7 +58,7 @@ function liberaInputs() {
     }
 }
 
-function trancaJogo(){
+function trancaTopBar(){
     document.getElementById("jogar").setAttribute("disabled", "");
     let inputsJogador = document.querySelectorAll('[id^=jog]')
     let inputsRadio = document.querySelectorAll("[name^=simbolo]")

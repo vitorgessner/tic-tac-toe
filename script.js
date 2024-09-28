@@ -4,14 +4,14 @@ let jogador1;
 let jogador2;
 let ranking = [];
 
+carregarStorage();
 drawBoard();
-carregarStorage()
 renderizarRanking();
 
 if (verificaGanhou()){
     trancaCanvas();
 } else {
-    trancaJogo();
+    trancaTopBar();
 }
 
 if (matriz == null) {
@@ -43,6 +43,7 @@ function resetaJogo() {
         simbolo: inputX1.checked ? 'o' : 'x',
     };
     jogadorAtual = jogador1.simbolo == 'o' ? jogador1 : jogador2;
+
     clearBoard();
     drawBoard();
     destrancaCanvas();
