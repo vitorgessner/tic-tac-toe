@@ -8,19 +8,23 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="canvas.js"></script>
     <script defer src="interface.js"></script>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div class="wrapper">
         <header>
             <div id="topBar">
-                <div class="teste">
+                <div class="players">
                     <label for="jog1">Jogador 1</label>
                     <input type="text" id="jog1">
+                    <span class="erro">Precisa de nome</span>
                     <div class="inputs">
                         <div class="inputRadio">
                             <label for="x1">X</label>
                             <input type="radio" name="simbolo" id="x1" checked>
+                            
                         </div>
                         <div class="inputRadio">
                             <label for="o1">O</label>
@@ -28,10 +32,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="teste"><span>&times;</span></div>
-                <div class="teste">
+                <div class="players x"><span>&times;</span></div>
+                <div class="players">
                     <label for="jog2">Jogador 2</label>
                     <input type="text" id="jog2">
+                    <span class="erro">Precisa de nome</span>
                     <div class="inputs">
                         <div class="inputRadio">
                             <label for="x2">X</label>
@@ -48,19 +53,12 @@
         </header>
 
         <aside>
-            <h1>Ranking</h1>
-            <ul id="jogadores">
-                <!-- <li>player1</li>
-                <li>player2</li>
-                <li>player3</li>
-                <li>player4</li>
-                <li>player5</li>
-                <li>player6</li> -->
-            </ul>
+            <h1><i class="fa-solid fa-crown"></i> Ranking </h1>
+            <ul id="jogadores"></ul>
         </aside>
 
         <div class="canva">
-            <canvas id="canvas" width="570" height="570"></canvas>
+            <canvas id="canvas"></canvas>
         </div>
 
     </div>

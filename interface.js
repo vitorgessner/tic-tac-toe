@@ -1,12 +1,11 @@
-const testes = document.querySelectorAll(".teste")
+const inputsRadio = document.querySelectorAll(".inputs")
 const simbolos1 = document.querySelectorAll('[name=simbolo]')
 const simbolos2 = document.querySelectorAll('[name=simbolo2]')
 const campoJogadores = document.querySelectorAll('input[type=text]')
+const erro = document.querySelectorAll(".erro")
 const botao = document.querySelector("#jogar")
 
-console.log(campoJogadores)
-
-testes[0].addEventListener("change", () => {
+inputsRadio[0].addEventListener("change", () => {
     if (simbolos1[0].checked === true) {
         simbolos2[1].checked = true;
     } else if (simbolos1[1].checked === true) {
@@ -14,7 +13,7 @@ testes[0].addEventListener("change", () => {
     }
 })
 
-testes[2].addEventListener("change", () => {
+inputsRadio[1].addEventListener("change", () => {
     if (simbolos2[0].checked === true) {
         simbolos1[1].checked = true;
     } else if (simbolos2[1].checked === true) {
@@ -23,14 +22,52 @@ testes[2].addEventListener("change", () => {
 })
 
 botao.addEventListener("click", () => {
-    for (campo of campoJogadores){
-        campo.setAttribute("disabled", "")
-    }
+    document.getElementById("jogar").setAttribute("disabled", "")
+    for (let i = 0; i < campoJogadores.length; i++) {
+        if (campoJogadores[i].value === "") {
+            erro[i].textContent = "Precisa de nome";
+            erro[i].style.display = "block";
+        } else if (campoJogadores[0].value === campoJogadores[1].value) {
+            erro[i].style.display = "block";
+            erro[i].textContent = "Nomes precisam ser diferentes";
+        } else {
+            erro[i].style.display = "none";
+            campoJogadores[i].setAttribute("disabled", "")
 
-    for (radio of simbolos1){
-        radio.setAttribute("disabled", "")
-    }
-    for (radio of simbolos2){
-        radio.setAttribute("disabled", "")
+            for (radio of simbolos1) {
+                radio.setAttribute("disabled", "")
+            }
+            for (radio of simbolos2) {
+                radio.setAttribute("disabled", "")
+            }
+            resetaJogo();
+        }
     }
 })
+
+function liberaInputs() {
+    for (campo of campoJogadores){
+        campo.removeAttribute("disabled");
+    }
+
+    for (radio of simbolos1) {
+        radio.removeAttribute("disabled")
+    }
+    for (radio of simbolos2) {
+        radio.removeAttribute("disabled")
+    }
+}
+
+function trancaJogo(){
+    document.getElementById("jogar").setAttribute("disabled", "");
+    let inputsJogador = document.querySelectorAll('[id^=jog]')
+    let inputsRadio = document.querySelectorAll("[name^=simbolo]")
+
+    for (input of inputsJogador){
+        input.setAttribute("disabled", "");
+    }
+
+    for (input of inputsRadio){
+        input.setAttribute("disabled", "");
+    }
+}

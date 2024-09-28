@@ -1,30 +1,33 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
+let canva = document.querySelector(".canva");
 
-ctx.beginPath();
-ctx.lineWidth = 30;
+canvas.width = canvas.offsetWidth
+canvas.height = canvas.offsetHeight
 
-// borders
-// ctx.moveTo(0, 0);
-// ctx.lineTo(canvas.width, 0);
-// ctx.lineTo(canvas.height, canvas.width);
-// ctx.lineTo(0, canvas.height);
-// ctx.closePath();
-// ctx.stroke();
+function drawBoard() {
+    ctx.beginPath();
+    ctx.lineWidth = 15;
+    ctx.strokeStyle = 'black';
 
-// vertical
-ctx.lineWidth = 5;
-ctx.moveTo(canvas.width / 3, 0);
-ctx.lineTo(canvas.width / 3, canvas.height);
-ctx.moveTo(canvas.width / 1.5, 0);
-ctx.lineTo(canvas.width / 1.5, canvas.height);
+    // vertical
+    ctx.moveTo(canvas.width / 3, 0);
+    ctx.lineTo(canvas.width / 3, canvas.height);
+    ctx.moveTo(canvas.width / 1.5, 0);
+    ctx.lineTo(canvas.width / 1.5, canvas.height);
 
-// horizontal
-ctx.moveTo(0, canvas.height / 3);
-ctx.lineTo(canvas.width, canvas.height / 3);
-ctx.moveTo(0, canvas.height / 1.5);
-ctx.lineTo(canvas.width, canvas.height / 1.5);
-ctx.stroke();
+    // horizontal
+    ctx.moveTo(0, canvas.height / 3);
+    ctx.lineTo(canvas.width, canvas.height / 3);
+    ctx.moveTo(0, canvas.height / 1.5);
+    ctx.lineTo(canvas.width, canvas.height / 1.5);
+    ctx.stroke();
+}
+
+function clearBoard() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 
 function place(player, row, collumn) {
     let yCircle
@@ -36,40 +39,40 @@ function place(player, row, collumn) {
     ctx.beginPath();
     ctx.lineWidth = 10;
 
-    if (row === 'top') {
+    if (row === 0) {
         yCircle = canvas.height / 6
-        move = canvas.height / 11.1
+        move = canvas.height / 12
         line = canvas.height / 4.1
-    } else if (row === 'center') {
+    } else if (row === 1) {
         yCircle = canvas.height / 2
-        move = canvas.height / 1.71
-        line = canvas.height / 2.41
-    } else if (row === 'bottom') {
+        move = canvas.height / 1.75
+        line = canvas.height / 2.35
+    } else if (row === 2) {
         yCircle = canvas.height / 1.2
-        move = canvas.height / 1.09
-        line = canvas.height / 1.35
+        move = canvas.height / 1.1
+        line = canvas.height / 1.32
     }
 
-    if (collumn === 'left') {
+    if (collumn === 0) {
         xCircle = canvas.width / 6
-        first = canvas.width / 11.1
-        second = canvas.width / 3.9
-    } else if (collumn === 'center') {
+        first = canvas.width / 9
+        second = canvas.width / 4.5
+    } else if (collumn === 1) {
         xCircle = canvas.width / 2
-        first = canvas.width / 1.71
-        second = canvas.width / 2.41
-    } else if (collumn === 'right') {
+        first = canvas.width / 1.8
+        second = canvas.width / 2.25
+    } else if (collumn === 2) {
         xCircle = canvas.width / 1.206
-        first = canvas.width / 1.09
-        second = canvas.width / 1.35
+        first = canvas.width / 1.13
+        second = canvas.width / 1.29
     }
 
-    if (player === 1) {
-        ctx.strokeStyle = 'blue';
+    if (player === 'o') {
+        ctx.strokeStyle = 'black';
         ctx.arc(xCircle, yCircle, 50, 0, Math.PI * 2);
 
     } else {
-        ctx.strokeStyle = 'red';
+        ctx.strokeStyle = 'black';
         ctx.moveTo(first, move);
         ctx.lineTo(second, line);
         ctx.moveTo(second, move);
@@ -78,66 +81,72 @@ function place(player, row, collumn) {
     ctx.stroke();
 }
 
-ctx.beginPath();
-ctx.strokeStyle = 'purple'
-// horizontal cima
-// ctx.moveTo(0, canvas.width / 6);
-// ctx.lineTo(canvas.width, canvas.width / 6);
+function winningLine(direction, place) {
+    ctx.beginPath();
+    ctx.strokeStyle = 'purple'
+    ctx.lineWidth = 15;
 
-// horizontal meio
-// ctx.moveTo(0, canvas.width / 2);
-// ctx.lineTo(canvas.width, canvas.width / 2);
-
-// horizontal baixo
-// ctx.moveTo(0, canvas.width / 1.2);
-// ctx.lineTo(canvas.width, canvas.width / 1.2);
-
-// vertical esquerda
-// ctx.moveTo(canvas.width / 6, 0);
-// ctx.lineTo(canvas.width / 6, canvas.height);
-
-// vertical centro
-// ctx.moveTo(canvas.width / 2, 0);
-// ctx.lineTo(canvas.width / 2, canvas.height);
-
-// vertical direita
-// ctx.moveTo(canvas.width / 1.2, 0);
-// ctx.lineTo(canvas.width / 1.2, canvas.height);
-
-// diagonal para direita
-// ctx.moveTo(0, 0);
-// ctx.lineTo(canvas.width, canvas.height);
-
-// diagonal para esquerda
-// ctx.moveTo(canvas.width, 0);
-// ctx.lineTo(0, canvas.height);
-
-ctx.stroke();
-
-let player = 1
-canvas.addEventListener('click', (e) => {
-    console.log(e.offsetX)
-    console.log(e.offsetY)
-
-    if (e.offsetX < 200 && e.offsetY < 200){
-        place(player, 'top', 'left');
-    } else if (e.offsetX < 400 && e.offsetY < 200){
-        place(player, 'top', 'center');
-    } else if (e.offsetX < 600 && e.offsetY < 200){
-        place(player, 'top', 'right');
-    } else if (e.offsetX < 200 && e.offsetY < 400){
-        place(player, 'center', 'left');
-    } else if (e.offsetX < 400 && e.offsetY < 400){
-        place(player, 'center', 'center');
-    } else if (e.offsetX < 600 && e.offsetY < 400){
-        place(player, 'center', 'right');
-    } else if (e.offsetX < 200 && e.offsetY < 600){
-        place(player, 'bottom', 'left');
-    } else if (e.offsetX < 400 && e.offsetY < 600){
-        place(player, 'bottom', 'center');
-    } else if (e.offsetX < 600 && e.offsetY < 600){
-        place(player, 'bottom', 'right');
+    if (direction === 'row') {
+        ctx.moveTo(0, canvas.height / place);
+        ctx.lineTo(canvas.width, canvas.height / place);
+    } else if (direction === 'collumn') {
+        ctx.moveTo(canvas.width / place, 0);
+        ctx.lineTo(canvas.width / place, canvas.height);
+    } else if (direction === 'leftDiagonal') {
+        ctx.moveTo(30, 20);
+        ctx.lineTo(canvas.width - 30, canvas.height - 20);
+    } else {
+        ctx.moveTo(canvas.width - 30, 20);
+        ctx.lineTo(0 + 30, canvas.height - 20);
     }
 
-    player *= -1
+
+    ctx.stroke();
+}
+
+// diagonal para direita
+
+
+// diagonal para esquerda
+
+
+canvas.addEventListener('click', (e, x, y) => {
+    if (canva.hasAttribute("disabled")) {
+        e.preventDefault();
+        e.stopPropagation();
+    } else {
+        document.getElementById("jogar").setAttribute("disabled", "")
+        x = e.offsetX;
+        y = e.offsetY;
+        if (x < canvas.width / 3 && y < canvas.height / 3) {
+            clicouNaMatriz(0, 0);
+        } else if (x < canvas.width / 1.5 && y < canvas.height / 3) {
+            clicouNaMatriz(0, 1);
+        } else if (x < canvas.width && y < canvas.height / 3) {
+            clicouNaMatriz(0, 2);
+        } else if (x < canvas.width / 3 && y < canvas.height / 1.5) {
+            clicouNaMatriz(1, 0);
+        } else if (x < canvas.width / 1.5 && y < canvas.height / 1.5) {
+            clicouNaMatriz(1, 1);
+        } else if (x < canvas.width && y < canvas.height / 1.5) {
+            clicouNaMatriz(1, 2);
+        } else if (x < canvas.width / 3 && y < canvas.height) {
+            clicouNaMatriz(2, 0);
+        } else if (x < canvas.width / 1.5 && y < canvas.height) {
+            clicouNaMatriz(2, 1);
+        } else if (x < canvas.width && y < canvas.height) {
+            clicouNaMatriz(2, 2);
+        }
+    }
 });
+
+function trancaCanvas() {
+    canva.setAttribute("disabled", "");
+    canva.classList.add("noCursor");
+}
+
+function destrancaCanvas() {
+    canva.removeAttribute("disabled");
+    canva.classList.remove("noCursor");
+}
+
