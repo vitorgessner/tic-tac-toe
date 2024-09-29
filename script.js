@@ -8,7 +8,7 @@ carregarStorage();
 drawBoard();
 renderizarRanking();
 
-if (verificaGanhou()){
+if (!matriz || verificaGanhou()){
     trancaCanvas();
 } else {
     trancaTopBar();
@@ -52,13 +52,12 @@ function resetaJogo() {
 
 function clicouNaMatriz(x, y) {
 
-    if (matriz[x][y] !== 0) {
+    if (!matriz || matriz[x][y] !== 0) {
         return;
     }
 
     matriz[x][y] = jogadorAtual.simbolo;
 
-    // TODO: Adaptar função place para receber simbolo 'x' e 'o', e o x e y como coordenadas de 0 a 2
     place(jogadorAtual.simbolo, x, y);
 
     const ganhador = verificaGanhou();
@@ -149,7 +148,7 @@ function renderizarRanking() {
 
 function salvarStorage() {
     localStorage.setItem('ranking', JSON.stringify(ranking));
-    localStorage.setItem('jogo', JSON.stringify({ matriz, jogadorAtual, jogador1, jogador2 }));
+    localStorage.setItem('jogo', JSON.stringify({ matriz, nomeJogadorAtual: jogadorAtual.nome, jogador1, jogador2 }));
 }
 
 function carregarStorage() {
@@ -158,9 +157,9 @@ function carregarStorage() {
     if (dados) {
         dados = JSON.parse(dados);
         matriz = dados.matriz;
-        jogadorAtual = dados.jogadorAtual;
         jogador1 = dados.jogador1;
         jogador2 = dados.jogador2;
+        jogadorAtual = jogador1.nome == dados.nomeJogadorAtual ? jogador1 : jogador2;
 
         // Redesenhando no jogo os dados antes de serem fechados
         for (let i = 0; i < matriz.length; i++){
