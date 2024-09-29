@@ -4,14 +4,18 @@ let jogador1;
 let jogador2;
 let ranking = [];
 
+const currentPlayer = document.querySelector(".currentPlayer")
+
+
 carregarStorage();
 drawBoard();
 renderizarRanking();
 
-if (!matriz || verificaGanhou()){
+if (!matriz || verificaGanhou()) {
     trancaCanvas();
 } else {
     trancaTopBar();
+
 }
 
 if (matriz == null) {
@@ -23,6 +27,9 @@ function resetaJogo() {
     const inputX1 = document.getElementById('x1');
     const nome1 = document.getElementById('jog1').value;
     const nome2 = document.getElementById('jog2').value;
+
+
+
 
     if (!nome1) {
         return;
@@ -46,6 +53,9 @@ function resetaJogo() {
     };
     jogadorAtual = jogador1.simbolo == 'o' ? jogador1 : jogador2;
 
+    currentPlayer.style.display = 'block'
+    currentPlayer.innerHTML = `É a vez do <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}<span/>`
+
     clearBoard();
     drawBoard();
     destrancaCanvas();
@@ -66,21 +76,25 @@ function clicouNaMatriz(x, y) {
     if (ganhador) {
         finalizarJogo(ganhador);
     }
+
     jogadorAtual = jogadorAtual == jogador1 ? jogador2 : jogador1
+
+    currentPlayer.innerHTML = `É a vez do <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>`
+
     salvarStorage();
 }
 
 function verificaGanhou() {
     let line;
     for (let i = 0; i < matriz.length; i++) {
-        switch (i){
+        switch (i) {
             case 0:
                 line = 6
                 break;
             case 1:
                 line = 2
                 break;
-            case 2: 
+            case 2:
                 line = 1.207
                 break;
         }
@@ -128,12 +142,29 @@ function finalizarJogo(ganhador) {
 
     ranking = ranking.sort((a, b) => a.pontos < b.pontos ? 1 : -1)
 
+
+    const modal = document.querySelector("#myModal");
+    const modalClose = document.querySelector(".close")
+    const modalMessage = document.querySelector(".message")
+
+    modal.style.display = 'block'
+
+    modalMessage.innerHTML = ganhadores.length > 1 ? `O jogo terminou empatado!` : `Parabéns, <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>! Você é o vencedor!`
+    modalClose.addEventListener('click', () => modal.style.display = 'none')
+    window.addEventListener('click', (evento) => {
+        if (evento.target == modal) {
+            modal.style.display = 'none'
+        }
+    })
+
     salvarStorage()
     renderizarRanking()
     liberaInputs();
     trancaCanvas();
+
     document.getElementById("jogar").removeAttribute("disabled", "")
 }
+
 
 
 function renderizarRanking() {
@@ -163,9 +194,9 @@ function carregarStorage() {
         jogadorAtual = jogador1.nome == dados.nomeJogadorAtual ? jogador1 : jogador2;
 
         // Redesenhando no jogo os dados antes de serem fechados
-        for (let i = 0; i < matriz.length; i++){
-            for (let j = 0; j < matriz.length; j++){
-                if (matriz[i][j] !== 0){
+        for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz.length; j++) {
+                if (matriz[i][j] !== 0) {
                     matriz[i][j] == 'x' ? place('x', i, j) : place('o', i, j);
                 }
             }
@@ -178,5 +209,7 @@ function carregarStorage() {
     if (dadosRanking) {
         ranking = JSON.parse(dadosRanking);
     }
+    currentPlayer.style.display = 'block'
+    currentPlayer.innerHTML = `É a vez do <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>`
 }
 
