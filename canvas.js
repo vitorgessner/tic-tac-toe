@@ -69,7 +69,7 @@ function place(player, row, collumn) {
 
     if (player === 'o') {
         ctx.strokeStyle = 'black';
-        ctx.arc(xCircle, yCircle, 50, 0, Math.PI * 2);
+        ctx.arc(xCircle, yCircle, 40, 0, Math.PI * 2);
 
     } else {
         ctx.strokeStyle = 'black';
@@ -103,12 +103,6 @@ function winningLine(direction, place) {
 
     ctx.stroke();
 }
-
-// diagonal para direita
-
-
-// diagonal para esquerda
-
 
 canvas.addEventListener('click', (e, x, y) => {
     if (canva.hasAttribute("disabled")) {
