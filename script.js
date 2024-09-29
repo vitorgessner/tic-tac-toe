@@ -25,7 +25,9 @@ function resetaJogo() {
     const nome2 = document.getElementById('jog2').value;
 
     if (!nome1) {
-        // alert('Jogador 1, preencha o seu nome!');
+        return;
+    }
+    if (!nome2) {
         return;
     }
 
@@ -135,7 +137,6 @@ function finalizarJogo(ganhador) {
 
 
 function renderizarRanking() {
-    // TODO
     let jogadores = document.getElementById('jogadores');
     jogadores.innerHTML = "";
 

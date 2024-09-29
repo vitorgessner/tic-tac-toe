@@ -32,21 +32,19 @@ botao.addEventListener("click", () => {
             erro[i].textContent = "Nomes precisam ser diferentes";
             return false
         } else {
-            if (campoJogadores[0].value && campoJogadores[1].value){
-                trancaCanvas();
-                document.getElementById("jogar").setAttribute("disabled", "")
-                resetaJogo();
-            }
             erro[i].style.display = "none";
-            campoJogadores[i].setAttribute("disabled", "")
-
-            for (radio of simbolos1) {
-                radio.setAttribute("disabled", "")
-            }
-            for (radio of simbolos2) {
-                radio.setAttribute("disabled", "")
-            }
         }
+    }
+    trancaCanvas();
+    document.getElementById("jogar").setAttribute("disabled", "")
+    campoJogadores.forEach(campoJogador => campoJogador.setAttribute("disabled", ""))
+    resetaJogo();
+
+    for (radio of simbolos1) {
+        radio.setAttribute("disabled", "")
+    }
+    for (radio of simbolos2) {
+        radio.setAttribute("disabled", "")
     }
 })
 
