@@ -31,52 +31,50 @@ function clearBoard() {
 
 function place(player, row, collumn) {
     let yCircle
-    let move
-    let line
+    let firstHeight
+    let secondHeight
     let xCircle
-    let first
-    let second
+    let firstWidth
+    let secondWidth
     ctx.beginPath();
     ctx.lineWidth = 10;
+    ctx.strokeStyle = 'black';
 
     if (row === 0) {
         yCircle = canvas.height / 6
-        move = canvas.height / 12
-        line = canvas.height / 4.1
+        firstHeight = canvas.height / 12
+        secondHeight = canvas.height / 4.1
     } else if (row === 1) {
         yCircle = canvas.height / 2
-        move = canvas.height / 1.75
-        line = canvas.height / 2.35
+        firstHeight = canvas.height / 1.75
+        secondHeight = canvas.height / 2.35
     } else if (row === 2) {
         yCircle = canvas.height / 1.2
-        move = canvas.height / 1.1
-        line = canvas.height / 1.32
+        firstHeight = canvas.height / 1.1
+        secondHeight = canvas.height / 1.32
     }
 
     if (collumn === 0) {
         xCircle = canvas.width / 6
-        first = canvas.width / 9
-        second = canvas.width / 4.5
+        firstWidth = canvas.width / 9
+        secondWidth = canvas.width / 4.5
     } else if (collumn === 1) {
         xCircle = canvas.width / 2
-        first = canvas.width / 1.8
-        second = canvas.width / 2.25
+        firstWidth = canvas.width / 1.8
+        secondWidth = canvas.width / 2.25
     } else if (collumn === 2) {
         xCircle = canvas.width / 1.206
-        first = canvas.width / 1.13
-        second = canvas.width / 1.29
+        firstWidth = canvas.width / 1.13
+        secondWidth = canvas.width / 1.29
     }
 
     if (player === 'o') {
-        ctx.strokeStyle = 'black';
         ctx.arc(xCircle, yCircle, 50, 0, Math.PI * 2);
-
     } else {
-        ctx.strokeStyle = 'black';
-        ctx.moveTo(first, move);
-        ctx.lineTo(second, line);
-        ctx.moveTo(second, move);
-        ctx.lineTo(first, line);
+        ctx.moveTo(firstWidth, firstHeight);
+        ctx.lineTo(secondWidth, secondHeight);
+        ctx.moveTo(secondWidth, firstHeight);
+        ctx.lineTo(firstWidth, secondHeight);
     }
     ctx.stroke();
 }
