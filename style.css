@@ -274,7 +274,7 @@ i {
         max-width: 8rem;
     }
 
-    @media screen and (min-height: 57.12em){
+    @media screen and (max-height: 57.12em){
         .wrapper aside {
             top: 80vh
         }
