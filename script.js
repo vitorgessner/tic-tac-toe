@@ -54,7 +54,7 @@ function resetaJogo() {
     jogadorAtual = jogador1.simbolo == 'o' ? jogador1 : jogador2;
 
     currentPlayer.style.display = 'block'
-    currentPlayer.innerHTML = `É a vez do <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}<span/>`
+    currentPlayer.innerHTML = `É a vez de <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}<span/>`
 
     clearBoard();
     drawBoard();
@@ -79,7 +79,7 @@ function clicouNaMatriz(x, y) {
 
     jogadorAtual = jogadorAtual == jogador1 ? jogador2 : jogador1
 
-    currentPlayer.innerHTML = `É a vez do <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>`
+    currentPlayer.innerHTML = `É a vez de <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>`
 
     salvarStorage();
 }
@@ -149,7 +149,7 @@ function finalizarJogo(ganhador) {
 
     modal.style.display = 'block'
 
-    modalMessage.innerHTML = ganhadores.length > 1 ? `O jogo terminou empatado!` : `Parabéns, <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>! Você é o vencedor!`
+    modalMessage.innerHTML = ganhadores.length > 1 ? `O jogo terminou empatado!` : `Parabéns, <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>! Você venceu!`
     modalClose.addEventListener('click', () => modal.style.display = 'none')
     window.addEventListener('click', (evento) => {
         if (evento.target == modal) {

@@ -278,5 +278,9 @@ i {
         .wrapper aside {
             top: 80vh
         }
+
+        .wrapper aside .hover {
+            font-size: 1rem;
+        }
     }
 }
