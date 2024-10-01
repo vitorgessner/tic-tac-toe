@@ -39,6 +39,7 @@ h1 {
     padding: 1rem 0;
     font-size: 1.2rem;
     overflow-y: auto;
+    
 }
 
 .wrapper aside h1{
@@ -50,6 +51,7 @@ ul {
     padding: 0 0;
     list-style-type: none;
     width: 100%;
+    
 }
 
 ul li{
@@ -202,6 +204,10 @@ i {
     color: blue;
 }
 
+.wrapper aside .hover {
+    display: none;
+}
+
 @media screen and (max-width: 84em) {
     header {
         grid-column: 1 / -1;
@@ -210,18 +216,71 @@ i {
     }
     
     .wrapper aside {
-        grid-column: 1 / -1;
-        grid-row: 7 / -1;
-        
+        /* grid-column: 1 / -1;
+        grid-row: 7 / -1; */
+        position: absolute;
+        left: 0;
+        right: 0;
+        transition: top 0.3s;
+        top: 92vh;
+        z-index: 1;
+        background-color: #8ace01;
+    }
+
+    .wrapper aside:hover {
+        bottom: 0;
+        top: 30vh;
+    }
+
+    ul li:nth-child(odd) {
+        background-color: #a2e61a;
     }
 
     .canva {
-        grid-row: 2 / 6;
+        grid-row: 2 / 8;
         grid-column: 2 / 12;
-        /* margin-top: 1rem; */
     }
 
     #topBar .players {
         padding: 1rem;
+    }
+
+    .wrapper aside .hover {
+        position: absolute;
+        display: block;
+        color: rgb(75, 75, 75);
+        top: 0;
+        right: 0;
+        z-index: 2;
+        transition: opacity 0.8s;
+    }
+
+    .wrapper aside:hover .hover {
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 31.25em) {
+    header {
+        font-size: .8rem;
+    }
+
+    #topBar {
+        font-size: 1rem;
+    }
+
+    #topBar input {
+        font-size: .8rem;
+        max-width: 8rem;
+    }
+
+    @media screen and (max-height: 57.12em){
+        .wrapper aside {
+            top: 85vh
+        }
+
+        .wrapper aside .hover {
+            font-size: 1rem;
+        }
     }
 }
