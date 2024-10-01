@@ -1,13 +1,33 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
-let canva = document.querySelector(".canva");
+const canva = document.querySelector(".canva");
 
-canvas.width = canvas.offsetWidth
-canvas.height = canvas.offsetHeight
+let canvasSize, boardLineWidth, circleRadius, xLineWidth;
+
+updateCanvasResponsiveSize();
+
+window.addEventListener('resize', () => updateCanvasResponsiveSize(true))
+
+function updateCanvasResponsiveSize(needRedraw) {
+    canvasSize = Math.min(canva.offsetWidth, canva.offsetHeight);
+
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+    canvas.setAttribute('width', canvasSize);
+    canvas.setAttribute('height', canvasSize);
+
+    boardLineWidth = Math.round(canvasSize * 0.0265);
+    xLineWidth = Math.round(canvasSize * 0.0177);
+    circleRadius = Math.round(canvasSize * 0.0886);
+
+    if(needRedraw) {
+        redraw();
+    }
+}
 
 function drawBoard() {
     ctx.beginPath();
-    ctx.lineWidth = 15;
+    ctx.lineWidth = boardLineWidth;
     ctx.strokeStyle = 'black';
 
     // vertical
@@ -37,7 +57,7 @@ function place(player, row, collumn) {
     let firstWidth
     let secondWidth
     ctx.beginPath();
-    ctx.lineWidth = 10;
+    ctx.lineWidth = xLineWidth;
     ctx.strokeStyle = 'black';
 
     if (row === 0) {
@@ -69,7 +89,7 @@ function place(player, row, collumn) {
     }
 
     if (player === 'o') {
-        ctx.arc(xCircle, yCircle, 50, 0, Math.PI * 2);
+        ctx.arc(xCircle, yCircle, circleRadius, 0, Math.PI * 2);
     } else {
         ctx.moveTo(firstWidth, firstHeight);
         ctx.lineTo(secondWidth, secondHeight);
@@ -82,7 +102,7 @@ function place(player, row, collumn) {
 function winningLine(direction, place) {
     ctx.beginPath();
     ctx.strokeStyle = 'purple'
-    ctx.lineWidth = 15;
+    ctx.lineWidth = boardLineWidth;
 
     if (direction === 'row') {
         ctx.moveTo(0, canvas.height / place);

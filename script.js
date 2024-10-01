@@ -194,13 +194,7 @@ function carregarStorage() {
         jogadorAtual = jogador1.nome == dados.nomeJogadorAtual ? jogador1 : jogador2;
 
         // Redesenhando no jogo os dados antes de serem fechados
-        for (let i = 0; i < matriz.length; i++) {
-            for (let j = 0; j < matriz.length; j++) {
-                if (matriz[i][j] !== 0) {
-                    matriz[i][j] == 'x' ? place('x', i, j) : place('o', i, j);
-                }
-            }
-        }
+        redraw()
 
         // Repondo nome dos jogadores
         document.getElementById("jog1").value = jogador1.nome;
@@ -213,3 +207,14 @@ function carregarStorage() {
     currentPlayer.innerHTML = `É a vez do <span class="${jogadorAtual == jogador1 ? 'player1' : 'player2'}">${jogadorAtual.nome}</span>`
 }
 
+function redraw() {
+    drawBoard();
+    for (let i = 0; i < matriz.length; i++) {
+        for (let j = 0; j < matriz.length; j++) {
+            if (matriz[i][j] !== 0) {
+                matriz[i][j] == 'x' ? place('x', i, j) : place('o', i, j);
+            }
+        }
+    }
+    verificaGanhou();
+}
