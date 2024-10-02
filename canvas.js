@@ -1,6 +1,8 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
 const canva = document.querySelector(".canva");
+const diamante = document.getElementById("diamante");
+const redstone = document.getElementById("redstone");
 
 let canvasSize, boardLineWidth, circleRadius, xLineWidth;
 
@@ -17,10 +19,10 @@ function updateCanvasResponsiveSize(needRedraw) {
     canvas.setAttribute('height', canvasSize);
 
     boardLineWidth = Math.round(canvasSize * 0.0265);
-    xLineWidth = Math.round(canvasSize * 0.0177);
-    circleRadius = Math.round(canvasSize * 0.0886);
+    diamondSize = Math.round(canvasSize * 0.157);
+    redstoneSize = Math.round(canvasSize * 0.207);
 
-    if(needRedraw) {
+    if (needRedraw) {
         redraw();
     }
 }
@@ -28,19 +30,60 @@ function updateCanvasResponsiveSize(needRedraw) {
 function drawBoard() {
     ctx.beginPath();
     ctx.lineWidth = boardLineWidth;
-    ctx.strokeStyle = 'black';
-
+    ctx.strokeStyle = '#ffffff70';
     // vertical
     ctx.moveTo(canvas.width / 3, 0);
     ctx.lineTo(canvas.width / 3, canvas.height);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth / 2;
+    ctx.strokeStyle = '#373737e0';
+    ctx.moveTo(canvas.width / 2.9, 0);
+    ctx.lineTo(canvas.width / 2.9, canvas.height);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth;
+    ctx.strokeStyle = '#ffffff70';
     ctx.moveTo(canvas.width / 1.5, 0);
     ctx.lineTo(canvas.width / 1.5, canvas.height);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth / 2;
+    ctx.strokeStyle = '#373737e0';
+    ctx.moveTo(canvas.width / 1.475, 0);
+    ctx.lineTo(canvas.width / 1.475, canvas.height);
+    ctx.stroke();
 
     // horizontal
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth;
+    ctx.strokeStyle = '#ffffff70';
     ctx.moveTo(0, canvas.height / 3);
     ctx.lineTo(canvas.width, canvas.height / 3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth / 2;
+    ctx.strokeStyle = '#373737e0';
+    ctx.moveTo(0, canvas.height / 2.94);
+    ctx.lineTo(canvas.width, canvas.height / 2.94);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth;
+    ctx.strokeStyle = '#ffffff70';
     ctx.moveTo(0, canvas.height / 1.5);
     ctx.lineTo(canvas.width, canvas.height / 1.5);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = boardLineWidth / 2;
+    ctx.strokeStyle = '#373737e0';
+    ctx.moveTo(0, canvas.height / 1.485);
+    ctx.lineTo(canvas.width, canvas.height / 1.485);
     ctx.stroke();
 }
 
@@ -62,47 +105,32 @@ function place(player, row, collumn) {
 
     if (row === 0) {
         yCircle = canvas.height / 6
-        firstHeight = canvas.height / 12
-        secondHeight = canvas.height / 4.1
     } else if (row === 1) {
         yCircle = canvas.height / 2
-        firstHeight = canvas.height / 1.75
-        secondHeight = canvas.height / 2.35
     } else if (row === 2) {
         yCircle = canvas.height / 1.2
-        firstHeight = canvas.height / 1.1
-        secondHeight = canvas.height / 1.32
     }
 
     if (collumn === 0) {
         xCircle = canvas.width / 6
-        firstWidth = canvas.width / 9
-        secondWidth = canvas.width / 4.5
     } else if (collumn === 1) {
         xCircle = canvas.width / 2
-        firstWidth = canvas.width / 1.8
-        secondWidth = canvas.width / 2.25
     } else if (collumn === 2) {
         xCircle = canvas.width / 1.206
-        firstWidth = canvas.width / 1.13
-        secondWidth = canvas.width / 1.29
     }
 
     if (player === 'o') {
-        ctx.arc(xCircle, yCircle, circleRadius, 0, Math.PI * 2);
+        ctx.drawImage(diamante, xCircle - diamondSize / 2, yCircle - diamondSize / 2, diamondSize, diamondSize);
     } else {
-        ctx.moveTo(firstWidth, firstHeight);
-        ctx.lineTo(secondWidth, secondHeight);
-        ctx.moveTo(secondWidth, firstHeight);
-        ctx.lineTo(firstWidth, secondHeight);
+        ctx.drawImage(redstone, xCircle - redstoneSize / 2, yCircle - redstoneSize / 2, redstoneSize, redstoneSize);
     }
     ctx.stroke();
 }
 
 function winningLine(direction, place) {
     ctx.beginPath();
-    ctx.strokeStyle = 'purple'
-    ctx.lineWidth = boardLineWidth;
+    ctx.strokeStyle = '#37373770';
+    ctx.lineWidth = boardLineWidth / 1.2;
 
     if (direction === 'row') {
         ctx.moveTo(0, canvas.height / place);
@@ -111,11 +139,11 @@ function winningLine(direction, place) {
         ctx.moveTo(canvas.width / place, 0);
         ctx.lineTo(canvas.width / place, canvas.height);
     } else if (direction === 'leftDiagonal') {
-        ctx.moveTo(30, 20);
-        ctx.lineTo(canvas.width - 30, canvas.height - 20);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(canvas.width, canvas.height);
     } else {
-        ctx.moveTo(canvas.width - 30, 20);
-        ctx.lineTo(0 + 30, canvas.height - 20);
+        ctx.moveTo(canvas.width, 0);
+        ctx.lineTo(0, canvas.height);
     }
 
 
@@ -161,4 +189,3 @@ function destrancaCanvas() {
     canva.removeAttribute("disabled");
     canva.classList.remove("noCursor");
 }
-

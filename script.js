@@ -171,9 +171,10 @@ function renderizarRanking() {
     let jogadores = document.getElementById('jogadores');
     jogadores.innerHTML = "";
 
-    for (jogador of ranking) {
+    for (let i = 0; i < ranking.length; i++) {
         let li = document.createElement("li");
-        li.innerHTML = `${jogador.nome}: ${jogador.pontos}`
+        li.classList.add("enchanting");
+        li.innerHTML = `<div><img src="./images/xp.png" width="20px"> <span class="xp sm">${i + 1}</span> ${ranking[i].nome}:</div> <span class="xp">${ranking[i].pontos}</span>`
         jogadores.appendChild(li)
     }
 }

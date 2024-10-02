@@ -8,7 +8,11 @@
 }
 
 body {
-    background-color: #8ACE01;
+    background-image: url(./images/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    backdrop-filter: blur(8px);
     color: black;
     display: flex;
     flex-direction: column;
@@ -33,6 +37,7 @@ h1 {
 }
 
 .wrapper aside {
+    background-color: #C6C6C6;
     border: 5px solid black;
     grid-column: 11 / -1;
     grid-row: 1 / -1;
@@ -55,12 +60,15 @@ ul {
 }
 
 ul li{
-    padding: .5rem .5rem .5rem 1rem;
+    display: flex;
+    padding: .5rem;
     width: 100%;
+    justify-content: space-between;
 }
 
-ul li:nth-child(odd){
-    background-color: #a2e61a;
+ul li div {
+    display: flex;
+    gap: .5rem
 }
 
 header {
@@ -74,6 +82,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #C6C6C6;
 }
 
 header button {
@@ -92,10 +101,17 @@ header button {
 }
 
 #canvas {
-    background-color: #8ACE01;
-
+    background-color: #9b9b9b;
+    border-top: 8px solid #373737;
+    border-left: 8px solid #373737;
+    border-right: 8px solid #ffffffd7;
+    border-bottom: 8px solid #ffffffd7;
     margin: 1rem auto;
     /* border-radius: 5px; */
+}
+
+#diamante, #redstone {
+    display: none;
 }
 
 #topBar {
@@ -111,7 +127,7 @@ header button {
 
 #topBar label {
     display: block;
-    margin-bottom: .25rem;
+    /* margin-bottom: .25rem; */
 }
 
 #topBar input {
@@ -119,6 +135,8 @@ header button {
     font-family: 'monocraft';
     max-width: 12rem;
     font-size: 1.2rem;
+    background-color: #5D5D5D;
+    color: white;
 }
 
 #topBar .players {
@@ -128,18 +146,23 @@ header button {
 
 
 .inputs {
-    margin: 0;
+    margin: .2rem;
     padding: 0;
     display: flex;
     gap: 1rem;
     accent-color: black;
+    align-items: center;
 }
 
 .inputRadio {
     display: flex;
-    align-items: first baseline;
+    align-items: center;
     margin: 0;
     padding: 0;
+}
+
+.inputRadio:nth-child(even){
+    gap: .2rem;
 }
 
 .erro {
@@ -193,7 +216,6 @@ i {
 
 .currentPlayer {
     display: none;
-
 }
 
 .player1 {
@@ -206,6 +228,46 @@ i {
 
 .wrapper aside .hover {
     display: none;
+}
+
+.enchanting {
+    background-color: #ac9b7b;
+    border-inline: 4px solid #3a332cbe;
+    border-top: 4px solid #3a332cbe;
+    /* outline: 4px solid #3a332cbe;
+    outline-offset: -2px; */
+    box-shadow: inset .2rem .2rem 0 #E1CDA3,
+                inset -.2rem -.2rem 0 #E1CDA3;
+    color: #685D44;
+}
+
+ul li:nth-child(odd){
+    background-color: #ac9b7b;
+}
+
+.enchanting:last-child{
+    border-bottom: 4px solid #3a332cbe;
+}
+
+.xp {
+    color: #7BFA1D;
+    text-shadow: 2px 2px #2c5a08;
+    align-self: flex-end;
+}
+
+.sm {
+    font-size: 1rem;
+    margin-left: -.8rem;
+}
+
+#jogar {
+    background-color: #5D5D5D;
+    color: white;
+    border: 2px solid black;
+}
+
+#topBar .players {
+    padding-top: 1rem;
 }
 
 @media screen and (max-width: 84em) {
@@ -224,7 +286,7 @@ i {
         transition: top 0.3s;
         top: 92vh;
         z-index: 1;
-        background-color: #8ace01;
+        /* background-color: #8ace01; */
     }
 
     .wrapper aside:hover {
@@ -232,9 +294,9 @@ i {
         top: 30vh;
     }
 
-    ul li:nth-child(odd) {
+    /* ul li:nth-child(odd) {
         background-color: #a2e61a;
-    }
+    } */
 
     .canva {
         grid-row: 2 / 8;
